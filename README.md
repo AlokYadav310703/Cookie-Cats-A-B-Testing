@@ -1,4 +1,4 @@
-# 🎮 Cookie Cats: A/B Test Analysis — Data-Driven Decision Making in Mobile Gaming
+# Cookie Cats: A/B Test Analysis — Data-Driven Decision Making in Mobile Gaming
 
 > **How Moving a Single Game Gate Impacts Player Retention: A Rigorous Statistical Analysis**
 
