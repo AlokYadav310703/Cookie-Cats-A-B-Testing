@@ -2,9 +2,12 @@
 
 > **How Moving a Single Game Gate Impacts Player Retention: A Rigorous Statistical Analysis**
 
+**Analysis Date:** August 2026
+**Data Source:** [Kaggle: Mobile Games A/B Testing — Cookie Cats](https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats)
+
 ---
 
-## 📊 Business Problem
+## Business Problem
 
 **The Challenge:**  
 Mobile game monetization depends critically on player engagement and retention. Cookie Cats, a popular mobile puzzle game, faced a strategic question:
@@ -24,22 +27,22 @@ Mobile game monetization depends critically on player engagement and retention. 
 
 ---
 
-## 💡 Solution Approach
+## Solution Approach
 
 This analysis applies **statistical rigor and best practices** to provide defensible answers:
 
-### 1️⃣ **Data Quality & Validation**
+### **Data Quality & Validation**
 - Verified 90,000+ players across two randomized groups
 - Checked for duplicates, missing values, and schema violations
 - Confirmed no sample ratio mismatch (no evidence of broken randomization)
 - Flagged and removed data-quality outliers (bots/instrumentation errors)
 
-### 2️⃣ **Exploratory Data Analysis (EDA)**
+### **Exploratory Data Analysis (EDA)**
 - Identified heavily right-skewed engagement distribution
 - Applied log transformation for interpretable visualization
 - Summarized retention patterns: ~44% day-1, ~19% day-7 retention baseline
 
-### 3️⃣ **Statistical Hypothesis Testing**
+### **Statistical Hypothesis Testing**
 Conducted rigorous hypothesis tests with proper assumptions checking:
 
 | Test | Metric | Finding |
@@ -48,38 +51,37 @@ Conducted rigorous hypothesis tests with proper assumptions checking:
 | **Two-proportion Z-test** | Day-7 retention | 1.9pp gap (gate_30 better), p = 0.002 ⭐ |
 | **Mann-Whitney U** | Engagement (sum_gamerounds) | No significant difference, p = 0.166 |
 
-### 4️⃣ **Multiple Comparisons Correction**
+### **Multiple Comparisons Correction**
 - Applied **Holm-Bonferroni** and **Benjamini-Hochberg** corrections
 - Result: Only **7-day retention survives correction** → Most defensible finding
 - Protects against false positives from running multiple tests on the same experiment
 
-### 5️⃣ **Confidence Intervals & Effect Sizes**
+### **Confidence Intervals & Effect Sizes**
 - Computed 95% confidence intervals using **Newcomb method** (superior to Wald for proportions)
 - Cohen's h effect sizes: Small but meaningful for mobile gaming at scale
 - **7-day retention CI:** gate_30 retains 1.0–2.8pp better than gate_40
 
-### 6️⃣ **Statistical Power Analysis**
+### **Statistical Power Analysis**
 - Achieved power: 45% (test was underpowered for day-1 retention)
 - Required sample size: 47K per group to detect 1pp effect at 80% power
 - **Implication:** Day-1 non-significance is *absence of evidence*, not evidence of absence
 
-### 7️⃣ **Bootstrap Simulation**
+### **Bootstrap Simulation**
 - Non-parametric validation of Z-test assumptions
 - Empirical 95% CI for retention difference: Mirrors parametric result ✓
 
-### 8️⃣ **Bayesian Analysis**
+### **Bayesian Analysis**
 - Complementary probabilistic framework (no p-value fallacies)
 - Direct posterior statement: **P(gate_30 > gate_40) = 96.2%**
 - Aligns with frequentist conclusion but adds interpretability
 
-### 9️⃣ **Segmentation (Exploratory)**
+### **Segmentation (Exploratory)**
 - Post-hoc analysis: Does effect differ by engagement level?
 - Finding: Both low- and high-engagement players show the same directional trend
-- ⚠️ Flagged as exploratory; should validate in dedicated follow-up
 
 ---
 
-## 📈 Key Results
+## Key Results
 
 ### **Primary Finding: 7-Day Retention is Materially Better with Gate at Level 30**
 
@@ -89,7 +91,7 @@ Treatment (Gate 40): 17.0% of players return after 7 days
 
 Difference:          1.9 percentage points  
 Relative Impact:     -10.1% (gate at 40 reduces retention)
-P-value:             0.002 ⭐ (survives multiple-comparisons correction)
+P-value:             0.002 (survives multiple-comparisons correction)
 95% CI:              [1.0pp, 2.8pp]
 ```
 
@@ -103,28 +105,23 @@ P-value:             0.002 ⭐ (survives multiple-comparisons correction)
 
 ---
 
-## 🎯 Business Recommendation
+## Business Recommendation
 
 **Keep the gate at Level 30**  
 The data provide statistically rigorous and practically meaningful evidence that moving the gate to Level 40 would reduce 7-day player retention by ~2 percentage points. For a large player base, this translates to significant lifetime-value loss.
 
-**Caveats:**
-- Analysis assumes randomization was properly implemented (no daily SRM check possible without timestamps)
-- Business threshold (1pp) is illustrative; should be derived from revenue/LTV model in practice
-- Segmentation findings are exploratory; validate with dedicated follow-up test before launch
-
 ---
 
-## 🛠️ Technical Highlights
+## Technical Highlights
 
 ### **Statistical Best Practices Applied**
-✅ Assumptions checked (normality, SRM)  
-✅ Non-parametric tests where data violates assumptions  
-✅ Multiple-comparisons correction before drawing conclusions  
-✅ Confidence intervals & effect sizes (not just p-values)  
-✅ Power analysis to interpret non-significant results  
-✅ Bootstrap validation of parametric tests  
-✅ Bayesian complement to frequentist framework  
+1. Assumptions checked (normality, SRM)  
+2. Non-parametric tests where data violates assumptions  
+3. Multiple-comparisons correction before drawing conclusions  
+4. Confidence intervals & effect sizes (not just p-values)  
+5. Power analysis to interpret non-significant results  
+6. Bootstrap validation of parametric tests  
+7. Bayesian complement to frequentist framework  
 
 ### **Data Handling Mastery**
 - Detected and handled outliers with domain reasoning (bots likely)
@@ -140,12 +137,12 @@ The data provide statistically rigorous and practically meaningful evidence that
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 .
 ├── README.md                          # This file
-├── 01_eda___Testing.ipynb            # Full notebook with all analysis
+├── 01_eda_&_Testing.ipynb            # Full notebook with all analysis
 ├── data/
 │   └── cookie_cats.csv               # Raw dataset (90,000+ players)
 └── requirements.txt                   # Python dependencies (scipy, pandas, etc.)
@@ -153,65 +150,14 @@ The data provide statistically rigorous and practically meaningful evidence that
 
 ---
 
-## 🚀 How to Use
-
-### **Run the full analysis:**
-```bash
-jupyter notebook 01_eda___Testing.ipynb
-```
-
-### **Key sections to review:**
-- **[Section 2-3]** Data loading & quality checks
-- **[Section 4-5]** EDA: distribution & retention overview
-- **[Section 8-9]** Hypothesis tests (retention & engagement)
-- **[Section 12]** Multiple comparisons correction (critical!)
-- **[Section 16-17]** Interpretation & business recommendation
-
----
-
-## 📚 Technical Dependencies
+## Technical Dependencies
 
 - **pandas**: Data manipulation & aggregation
 - **scipy.stats**: Hypothesis tests (z-test, Mann-Whitney U, Shapiro-Wilk)
 - **statsmodels**: Proportion testing, confidence intervals, power analysis
 - **numpy**: Numerical computations & bootstrap simulation
-- **matplotlib**: Publication-quality visualizations
+- **matplotlib**: Visualizations
 
 ---
 
-## 🔍 Why This Project Stands Out
 
-### **For Data Scientists:**
-- Demonstrates mastery of frequentist + Bayesian frameworks
-- Proper handling of multiple testing problem (not a trivial oversight)
-- Non-parametric alternatives when assumptions fail
-- Bootstrap validation of parametric methods
-
-### **For Product Managers:**
-- Clear business framing (revenue impact, not just p-values)
-- Actionable recommendation with caveats
-- Quantifies uncertainty via confidence intervals
-- Distinguishes statistical significance from practical significance
-
-### **For Recruiters:**
-This project shows:
-- 🎯 **Problem-solving:** Frames a technical question as a business decision
-- 🔧 **Rigor:** Applies statistical best practices, not shortcuts
-- 📊 **Communication:** Explains findings to non-technical stakeholders
-- 🎓 **Growth mindset:** Explores multiple approaches (frequentist, Bayesian, bootstrap)
-- ✅ **Attention to detail:** Validates assumptions, checks for common pitfalls
-
----
-
-## 💬 Contact & Discussion
-
-This analysis is ready for code review, discussion, or follow-up questions. Key areas for deeper conversation:
-
-1. How would you parameterize the business threshold from LTV?
-2. What segmentation strategy would you prioritize for follow-up?
-3. How would you design a rollout experiment?
-
----
-
-**Analysis Date:** 2024  
-**Data Source:** [Kaggle: Mobile Games A/B Testing — Cookie Cats](https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats)
